@@ -10,6 +10,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+        './app-modules/**/resources/**/*.vue',
+        './app-modules/**/resources/**/*.js',
     ],
 
     theme: {

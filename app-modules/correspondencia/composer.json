@@ -1,0 +1,24 @@
+{
+	"name": "modules/correspondencia",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Correspondencia\\": "src/",
+			"Modules\\Correspondencia\\Tests\\": "tests/",
+			"Modules\\Correspondencia\\Database\\Factories\\": "database/factories/",
+			"Modules\\Correspondencia\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Correspondencia\\Providers\\CorrespondenciaServiceProvider"
+			]
+		}
+	}
+}
