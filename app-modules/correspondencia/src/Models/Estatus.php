@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Estatus extends Model
 {
     protected $table = 'estatus';
+    protected $primaryKey = 'id_estatus'; 
+
+    public $incrementing = true; 
+    protected $keyType = 'int'; 
 
     protected $fillable = [
         'nombre_estatus',

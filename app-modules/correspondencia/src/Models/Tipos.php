@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tipos extends Model
 {
     protected $table = 'tipos';
+    protected $primaryKey = 'id_tipo'; 
+
+    public $incrementing = true; 
+    protected $keyType = 'int'; 
 
     protected $fillable = [
         'nombre_tipo',

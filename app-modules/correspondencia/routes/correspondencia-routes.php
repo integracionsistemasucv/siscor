@@ -13,8 +13,21 @@ use Modules\Correspondencia\Http\Controllers\CorrespondenciaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Modules\Correspondencia\Http\Controllers\CrudTablasController;
 
 Route::get ('/correspondencias', [CorrespondenciaController::class, 'index'])->name('correspondencia.index');
+
+
+// crear un middleware para autenticar las rutas
+Route::controller(CrudTablasController::class)->group(function () {
+    Route::get('/tipos', 'getAllTipos')->name('correspondencia.tipos');
+    Route::post('/tiposCreate', 'createTipo')->name('correspondencia.tipos.create');
+    Route::put('/tiposUpdate/{id}', 'updateTipo')->name('correspondencia.tipos.update');
+    Route::delete('/tiposDelete/{id}', 'deleteTipo')->name('correspondencia.tipos.delete');
+
+    Route::get('/categorias', 'getCategorias')->name('correspondencia.categorias');
+    Route::get('/estatus', 'getEstatus')->name('correspondencia.estatus');
+});
 
 Route::get('/usuarios', function () {
     return Inertia::render('Users', [
