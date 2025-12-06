@@ -15,11 +15,11 @@ class CrudTablasController
         private EstatusService $estatusService
     ) {}
 
-    // Métodos para manejar las operaciones CRUD utilizando los servicios
+// Métodos para manejar las operaciones CRUD utilizando los servicios
 
     // ------ TIPOS ------
 
-    public function getAllTipos()
+    public function getTipos()
     {
         return $this->tiposService->getAllTipos();
     }
@@ -44,5 +44,63 @@ class CrudTablasController
     public function deleteTipo(int $id)
     {
         return $this->tiposService->deleteTipo($id);
+    }
+
+    // ------ CATEGORIAS ------
+
+    public function getCategorias()
+    {
+        return $this->categoriasService->getAllCategorias();
+    }
+
+    public function getCategoriaById(int $id)
+    {
+        return $this->categoriasService->getCategoriaById($id);
+    }
+
+    public function createCategoria(Request $request)
+    {
+        $data = $request->all();
+        return $this->categoriasService->createCategoria($data);
+    }
+
+    public function updateCategoria(int $id, Request $request)
+    {
+        $data = $request->all();
+        return $this->categoriasService->updateCategoria($id, $data);
+    }
+
+    public function deleteCategoria(int $id)
+    {
+        return $this->categoriasService->deleteCategoria($id);
+    }
+
+    // ------ ESTATUS ------
+
+    public function getEstatus()
+    {
+        return $this->estatusService->getAllEstatus();
+    }
+
+    public function getEstatusById(int $id)
+    {
+        return $this->estatusService->getEstatusById($id);
+    }
+
+    public function createEstatus(Request $request)
+    {
+        $data = $request->all();
+        return $this->estatusService->createEstatus($data);
+    }
+
+    public function updateEstatus(int $id, Request $request)
+    {
+        $data = $request->all();
+        return $this->estatusService->updateEstatus($id, $data);
+    }
+
+    public function deleteEstatus(int $id)
+    {
+        return $this->estatusService->deleteEstatus($id);
     }
 }
