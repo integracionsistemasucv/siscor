@@ -20,6 +20,7 @@ class CategoriasRepository implements CategoriasRepositoryInterface
 
     public function create(array $data)
     {
+        $data['nombre_categoria'] = strtolower(trim($data['nombre_categoria']));
         return Categorias::create($data);
     }
 

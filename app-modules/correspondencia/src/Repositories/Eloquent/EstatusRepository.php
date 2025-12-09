@@ -20,6 +20,7 @@ class EstatusRepository implements EstatusRepositoryInterface
 
     public function create(array $data)
     {
+        $data['nombre_estatus'] = strtolower(trim($data['nombre_estatus']));
         return Estatus::create($data);
     }
 

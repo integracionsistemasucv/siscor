@@ -22,6 +22,7 @@ class TiposRepository implements TiposRepositoryInterface
 
     public function create(array $data)
     {
+        $data['nombre_tipo'] = strtolower(trim($data['nombre_tipo']));
         return Tipos::create($data);
     }
 
