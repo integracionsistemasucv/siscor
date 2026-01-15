@@ -29,6 +29,7 @@ class CorrespondenciaServiceProvider extends ServiceProvider
 	public function boot(): void
 	{
 
+		// para uso general(sesiones, usuarios, etc)
 		// Route::middleware('web')
 		// 	->group(__DIR__ . '/../../routes/correspondencia-routes.php');
 

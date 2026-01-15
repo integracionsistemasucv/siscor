@@ -9,7 +9,7 @@ class CorrespondenciaController
 {
     public function index()
     {
-       return Inertia::render('correspondencia/resources/js/Pages/Index');
+       return Inertia::render('Index');
 
     }
 }
