@@ -14,9 +14,9 @@ Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session')])->gr
     Route::get('/correspondencias', [CorrespondenciaController::class, 'index'])
         ->name('correspondencia.index');
 
-    Route::get('/usuarios', function () {
-        return Inertia::render('Users', []);
-    })->name('usuarios.index');
+    // Route::get('/usuarios', function () {
+    //     return Inertia::render('Users', []);
+    // })->name('usuarios.index');
 });
 
 // crear un middleware para autenticar las rutas

@@ -32,7 +32,7 @@
             Gestión de cuenta
           </div>
 
-          <DropdownLink :href="route('usuarios.index')">
+          <DropdownLink :href="route('usuarios.profile')">
             Perfil
           </DropdownLink>
           <div class="border-t border-gray-200" />
