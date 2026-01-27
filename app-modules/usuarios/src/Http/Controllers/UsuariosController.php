@@ -3,17 +3,27 @@
 namespace Modules\Usuarios\Http\Controllers;
 
 use Illuminate\Http\Request;
-USE Inertia\Inertia;
+use Inertia\Inertia;
+use Modules\Usuarios\Services\UserService;
 
 class UsuariosController
 {
-    public function index()
-    {
-       return Inertia::render('usuarios/resources/js/Pages/Index');
-    }
+   public function __construct(private UserService $userService) {}
 
-    public function profile()
-    {
-       return Inertia::render('Profile/Index');
-    }
+   public function index()
+   {
+      $users = $this->userService->getAllUsers();
+
+      return Inertia::render(
+         'usuarios/resources/js/Pages/Index',
+         [
+            'users' => $users,
+         ]
+      );
+   }
+
+   public function profile()
+   {
+      return Inertia::render('Profile/Index');
+   }
 }
