@@ -12,4 +12,22 @@ class CorrespondenciaController
        return Inertia::render('Index');
 
     }
+
+    public function inbox()
+    {
+       return Inertia::render('BandejaEntrada');
+
+    }
+
+    public function sent()
+    {
+       return Inertia::render('Enviadas');
+
+    }
+
+    public function pending()
+    {
+       return Inertia::render('Pendientes');
+
+    }
 }
