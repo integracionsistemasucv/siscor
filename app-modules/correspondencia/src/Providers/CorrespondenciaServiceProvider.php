@@ -11,7 +11,6 @@ use Modules\Correspondencia\Repositories\Contracts\CategoriasRepositoryInterface
 use Modules\Correspondencia\Repositories\Contracts\EstatusRepositoryInterface;
 use Modules\Correspondencia\Repositories\Contracts\TiposRepositoryInterface;
 
-
 use Modules\Correspondencia\Repositories\Eloquent\EstatusRepository;
 use Modules\Correspondencia\Repositories\Eloquent\TiposRepository;
 use Modules\Correspondencia\Repositories\Eloquent\CategoriasRepository;
@@ -30,6 +29,7 @@ class CorrespondenciaServiceProvider extends ServiceProvider
 	public function boot(): void
 	{
 
+		// para uso general(sesiones, usuarios, etc)
 		// Route::middleware('web')
 		// 	->group(__DIR__ . '/../../routes/correspondencia-routes.php');
 

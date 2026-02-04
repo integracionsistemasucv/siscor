@@ -2,6 +2,7 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\FortifyServiceProvider::class,
-    App\Providers\JetstreamServiceProvider::class,
+    Modules\Usuarios\Providers\FortifyServiceProvider::class,
+    Modules\Usuarios\Providers\JetstreamServiceProvider::class,
+    Modules\Usuarios\Providers\UsuariosServiceProvider::class,
 ];

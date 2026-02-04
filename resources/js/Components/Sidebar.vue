@@ -55,7 +55,6 @@ const toggleSidebar = () => {
 };
 
 const menuItems = [
-  { label: "Inicio", icon: "pi pi-home", href: "/" },
   { label: "Correspondencias", icon: "pi pi-envelope", href: "/correspondencias" },
   { label: "Archivo", icon: "pi pi-box", href: "/Archivo" },
   { label: "Usuarios", icon: "pi pi-users", href: "/usuarios" },

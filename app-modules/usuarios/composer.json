@@ -1,0 +1,26 @@
+{
+	"name": "modules/usuarios",
+	"description": "",
+	"type": "library",
+	"version": "1.0",
+	"license": "proprietary",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"Modules\\Usuarios\\": "src/",
+			"Modules\\Usuarios\\Tests\\": "tests/",
+			"Modules\\Usuarios\\Database\\Factories\\": "database/factories/",
+			"Modules\\Usuarios\\Database\\Seeders\\": "database/seeders/"
+		}
+	},
+	"minimum-stability": "stable",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\Usuarios\\Providers\\UsuariosServiceProvider",
+				"Modules\\Usuarios\\Providers\\FortifyServiceProvider",
+				"Modules\\Usuarios\\Providers\\JetstreamServiceProvider"
+			]
+		}
+	}
+}
