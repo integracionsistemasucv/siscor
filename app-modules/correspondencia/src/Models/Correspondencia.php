@@ -11,14 +11,14 @@ class Correspondencia extends Model
 
     public function tipo()
     {
-        return $this->belongsTo(Tipos::class, 'tipo_id', 'id_tipo');
+        return $this->belongsTo(Tipos::class);
     }
     public function categoria()
     {
-        return $this->belongsTo(Categorias::class, 'categoria_id', 'id_categoria');
+        return $this->belongsTo(Categorias::class);
     }
     public function estatus()
     {
-        return $this->belongsTo(Estatus::class, 'estatus_id', 'id_estatus');
+        return $this->belongsTo(Estatus::class);
     }
 }

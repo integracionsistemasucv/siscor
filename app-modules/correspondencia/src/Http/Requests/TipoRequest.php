@@ -42,7 +42,7 @@ class TipoRequest extends FormRequest
                 'string',
                 'max:255',
                 $id
-                    ? Rule::unique('tipos', 'nombre_tipo')->ignore($id, 'id_tipo')
+                    ? Rule::unique('tipos', 'nombre_tipo')->ignore($id)
                     : Rule::unique('tipos', 'nombre_tipo'),
             ],
         ];
