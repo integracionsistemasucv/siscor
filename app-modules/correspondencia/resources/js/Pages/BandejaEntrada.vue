@@ -61,7 +61,7 @@ import Navbar from '@/Components/Navbar.vue';
           </template>
         </Toolbar>
 
-        <div class="border border-zinc-200 dark:border-zinc-200 rounded-lg overflow-hidden shadow-sm">
+        <div class="border border-zinc-200 dark:border-zinc-200  overflow-hidden shadow-sm">
           <DataTable 
             :value="emails" 
             v-model:selection="selectedEmails" 
