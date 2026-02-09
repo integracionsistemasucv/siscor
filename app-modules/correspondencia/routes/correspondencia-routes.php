@@ -11,8 +11,15 @@ use Modules\Correspondencia\Http\Controllers\EstatusController;
 
 Route::middleware(['web', 'auth:sanctum', config('jetstream.auth_session')])->group(function () {
 
-    Route::get('/correspondencias', [CorrespondenciaController::class, 'index'])
-        ->name('correspondencia.index');
+    Route::get('/inicio', [CorrespondenciaController::class, 'index'])
+        ->name('inicio.index');
+    Route::get('/bandeja-entrada', [CorrespondenciaController::class, 'inbox'])
+        ->name('bandeja-entrada.index');
+    Route::get('/enviadas', [CorrespondenciaController::class, 'sent'])
+        ->name('enviadas.index');
+    Route::get('/pendientes', [CorrespondenciaController::class, 'pending'])
+        ->name('pendientes.index');
+
 
     // Route::get('/usuarios', function () {
     //     return Inertia::render('Users', []);
