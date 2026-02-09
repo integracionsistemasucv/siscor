@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return redirect()->route('correspondencia.index');
+        return redirect()->route('inicio.index');
     }
 
     return Inertia::render('Welcome', [
