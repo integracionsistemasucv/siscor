@@ -38,7 +38,7 @@ class CategoriaRequest extends FormRequest
                 'string',
                 'max:255',
                 $id
-                    ? Rule::unique('categorias', 'nombre_categoria')->ignore($id, 'id_categoria')
+                    ? Rule::unique('categorias', 'nombre_categoria')->ignore($id)
                     : Rule::unique('categorias', 'nombre_categoria'),
             ],
         ];

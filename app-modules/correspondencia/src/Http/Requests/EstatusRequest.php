@@ -38,7 +38,7 @@ class EstatusRequest extends FormRequest
                 'string',
                 'max:255',
                 $id
-                    ? Rule::unique('estatus', 'nombre_estatus')->ignore($id, 'id_estatus')
+                    ? Rule::unique('estatus', 'nombre_estatus')->ignore($id)
                     : Rule::unique('estatus', 'nombre_estatus'),
             ],
         ];
