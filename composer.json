@@ -17,6 +17,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "modules/correspondencia": "*",
+        "modules/radicacion": "*",
         "modules/usuarios": "*",
         "tightenco/ziggy": "^2.0"
     },

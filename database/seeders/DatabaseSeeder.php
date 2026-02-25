@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             \Modules\Correspondencia\Database\Seeders\CategoriaSeeder::class,
             \Modules\Correspondencia\Database\Seeders\EstatusSeeder::class,
             \Modules\Correspondencia\Database\Seeders\TiposSeeder::class,
+            \Modules\Radicacion\Database\Seeders\TipoRadicadoSeeder::class,
         ]);
         
         User::factory(20)->create();
