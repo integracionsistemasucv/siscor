@@ -1,95 +1,89 @@
 <template>
-  <div class="flex flex-col h-screen bg-gray-50">
+  <div class="flex flex-col h-screen bg-slate-50">
     <Navbar />
+
     <div class="flex flex-1 overflow-hidden">
       <Sidebar />
-      <main class="flex-1 p-8 overflow-y-auto">
-        <div class="flex justify-between items-center">
-          <div>
-            <h2 class="text-2xl font-semibold text-gray-800">Radicación de Documentos</h2>
-            <p class="mt-2 text-gray-600">
-              Gestione y consulte el histórico de radicados generados.
-            </p>
-          </div>
-          <Link :href="route('radicacion.create')">
-            <Button label="Nuevo Radicado" icon="pi pi-plus" class="p-button-primary" />
-          </Link>
+
+      <main class="flex-1 flex flex-col min-w-0 bg-slate-50">
+
+        <div class="px-8 pt-8">
+          <h2 class="text-2xl font-semibold text-gray-800">Radicados</h2>
+          <p class="mt-2 text-gray-600">Gestione sus radicados aquí</p>
+          <div class="mt-4 border-b border-gray-200"></div>
         </div>
 
-        <Divider />
+        <header class="flex items-end px-8 pt-4 gap-1 bg-slate-50 border-b border-gray-200">
+          <button @click="activeTab = 'bandeja'" :class="['px-4 py-2 text-sm font-medium rounded-t-lg transition-colors border-t border-x',
+            activeTab === 'bandeja'
+              ? 'bg-blue-600 text-white border-blue-600'
+              : 'bg-gray-100 text-gray-600 border-transparent hover:bg-gray-200']">
+            📥 Bandeja de Entrada
+          </button>
 
-        <div class="bg-white shadow-md rounded-lg p-4">
-          <DataTable 
-            :value="radicados.data" 
-            :rows="10" 
-            stripedRows 
-            responsiveLayout="scroll"
-            class="p-datatable-sm"
-          >
-            <template #empty>
-              <div class="text-center p-4">No se encontraron radicados en su bandeja.</div>
-            </template>
-
-            <Column field="numero_radicado" header="Nro. Radicado" sortable class="font-bold text-blue-600">
-              <template #body="slotProps">
-                <span class="font-mono">{{ slotProps.data.numero_radicado }}</span>
-              </template>
-            </Column>
-
-            <Column field="asunto" header="Asunto" :style="{ minWidth: '300px' }">
-              <template #body="slotProps">
-                <div class="truncate w-80" :title="slotProps.data.asunto">
-                  {{ slotProps.data.asunto }}
-                </div>
-              </template>
-            </Column>
-
-            <Column field="tipo.nombre" header="Tipo">
-              <template #body="slotProps">
-                <Tag :value="slotProps.data.tipo?.nombre" severity="info" />
-              </template>
-            </Column>
-
-            <Column field="fecha_radicado" header="Fecha de Radicación" sortable>
-              <template #body="slotProps">
-                {{ format(new Date(slotProps.data.fecha_radicado), 'dd/MM/yyyy HH:mm') }}
-              </template>
-            </Column>
-
-            <Column header="Acciones" class="text-center">
-              <template #body="slotProps">
-                <div class="flex gap-2 justify-center">
-                  <Button icon="pi pi-eye" class="p-button-rounded p-button-text" v-tooltip="'Ver Detalle'" />
-                  <Button icon="pi pi-file-pdf" class="p-button-rounded p-button-text p-button-danger" v-tooltip="'Ver Documento'" />
-                  <Button icon="pi pi-history" class="p-button-rounded p-button-text p-button-help" v-tooltip="'Ver Trazabilidad'" />
-                </div>
-              </template>
-            </Column>
-          </DataTable>
-          
-          <div class="mt-4 flex justify-end">
-             <p class="text-sm text-gray-500">Mostrando {{ radicados.from }} a {{ radicados.to }} de {{ radicados.total }} registros</p>
+          <div v-for="tab in radicaciones" :key="tab.id" class="flex items-center group">
+            <button @click="activeTab = tab.id" :class="['px-4 py-2 text-sm font-medium rounded-t-lg transition-colors flex items-center gap-2 border-t border-x',
+              activeTab === tab.id
+                ? 'bg-emerald-600 text-white border-emerald-600'
+                : 'bg-gray-100 text-gray-600 border-transparent hover:bg-gray-200']">
+              📄 Nuevo Radicado ({{ tab.id.toString().slice(-4) }})
+              <span @click.stop="cerrarTab(tab.id)"
+                class="hover:bg-black/20 rounded-full w-4 h-4 flex items-center justify-center transition-colors">
+                ×
+              </span>
+            </button>
           </div>
+
+          <button @click="nuevaRadicacion"
+            class="ml-4 px-3 py-1.5 mb-1 text-xs font-bold bg-gray-800 text-white rounded-md hover:bg-black transition-all shadow-sm">
+            + NUEVO TRÁMITE
+          </button>
+        </header>
+
+        <div class="flex-1 overflow-auto p-8">
+          <KeepAlive>
+            <component :is="activeTab === 'bandeja' ? BandejaPrincipal : RadicadorWizard" :key="activeTab"
+              :tabId="activeTab" :radicados="radicados" @close="cerrarTab" />
+          </KeepAlive>
         </div>
+
       </main>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import Sidebar from '@/Components/Sidebar.vue';
 import Navbar from '@/Components/Navbar.vue';
+import BandejaPrincipal from '../Components/BandejaPrincipal.vue';
+import RadicadorWizard from '../Components/RadicadorWizard.vue';
+
+const activeTab = ref('bandeja');
+const radicaciones = ref([]);
+
+const nuevaRadicacion = () => {
+  const id = Date.now();
+  radicaciones.value.push({ id });
+  activeTab.value = id;
+};
+
+const cerrarTab = (id) => {
+  radicaciones.value = radicaciones.value.filter(t => t.id !== id);
+  if (activeTab.value === id) {
+    activeTab.value = 'bandeja';
+  }
+};
 
 defineProps({
-    radicados: Object
+  radicados: Object
 });
+
 </script>
 
 <style scoped>
-/* Ajustes para que PrimeVue combine mejor con Tailwind */
-:deep(.p-datatable-thead > tr > th) {
-  background-color: #f8fafc;
-  color: #475569;
+/* Evita que el scroll del main afecte al Navbar/Sidebar */
+main {
+  height: 100%;
 }
 </style>
