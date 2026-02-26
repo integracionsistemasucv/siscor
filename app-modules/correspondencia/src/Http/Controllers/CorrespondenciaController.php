@@ -9,25 +9,25 @@ class CorrespondenciaController
 {
     public function index()
     {
-       return Inertia::render('Index');
+       return Inertia::render('correspondencia::Index');
 
     }
 
     public function inbox()
     {
-       return Inertia::render('BandejaEntrada');
+       return Inertia::render('correspondencia::BandejaEntrada');
 
     }
 
     public function sent()
     {
-       return Inertia::render('Enviadas');
+       return Inertia::render('correspondencia::Enviadas');
 
     }
 
     public function pending()
     {
-       return Inertia::render('Pendientes');
+       return Inertia::render('correspondencia::Pendientes');
 
     }
 }

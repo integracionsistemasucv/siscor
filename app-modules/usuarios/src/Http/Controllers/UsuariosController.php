@@ -28,7 +28,7 @@ class UsuariosController
     // Capturamos los filtros del Request
    $filters = $request->only(['search', 'sortField', 'sortOrder']);
 
-    return Inertia::render('usuarios/resources/js/Pages/Index', [
+    return Inertia::render('usuarios::Index', [
         // Pasamos los filtros al servicio
         'users' => $this->userService->getPaginatedUsers(10, $filters),
         // Enviamos los filtros de vuelta a la vista para que el input no se vacíe
@@ -38,6 +38,6 @@ class UsuariosController
 
    public function profile()
    {
-      return Inertia::render('Profile/Index');
+      return Inertia::render('usuarios::Profile/Index');
    }
 }

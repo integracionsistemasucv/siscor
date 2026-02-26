@@ -17,17 +17,42 @@ const modulePages = import.meta.glob('../../app-modules/**/resources/js/Pages/**
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
+    // resolve: async (name) => {
+    //     for (const path in modulePages) {
+    //         if (path.endsWith(`/${name}.vue`)) {
+    //             return (await modulePages[path]()).default;
+    //         }
+    //     }
+    //     for (const path in corePages) {
+    //         if (path.endsWith(`/${name}.vue`)) {
+    //             return (await corePages[path]()).default;
+    //         }
+    //     }
+    //     throw new Error(`Page not found: ${name}`);
+    // },
     resolve: async (name) => {
-        for (const path in modulePages) {
-            if (path.endsWith(`/${name}.vue`)) {
-                return (await modulePages[path]()).default;
+        // 1. Manejo de módulos (Ej: "Radicacion::Index")
+        if (name.includes('::')) {
+            const [module, page] = name.split('::');
+
+            // Buscamos en el objeto modulePages (ajusta la ruta según tu glob)
+            // Se asume que el path en glob es algo como "../../app-modules/Radicacion/resources/js/Pages/Index.vue"
+            for (const path in modulePages) {
+                if (path.includes(`/app-modules/${module}/`) && path.endsWith(`/${page}.vue`)) {
+                    const pageModule = await modulePages[path]();
+                    return pageModule.default;
+                }
             }
         }
+
+        // 2. Manejo de páginas core (comportamiento actual)
         for (const path in corePages) {
             if (path.endsWith(`/${name}.vue`)) {
-                return (await corePages[path]()).default;
+                const pageModule = await corePages[path]();
+                return pageModule.default;
             }
         }
+
         throw new Error(`Page not found: ${name}`);
     },
     setup({ el, App, props, plugin }) {
